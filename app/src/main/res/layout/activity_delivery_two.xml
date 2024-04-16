@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/swipeRefreshLayout"
+    tools:context=".activity.trackingmap.DeliveryTwoActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:src="@drawable/map_image"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="5dp"
+                android:id="@+id/lnr_delivery_click"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:textColor="#989898"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="Destination:"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:textColor="#989898"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="Order Pickup:"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:textColor="#989898"
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/txtDestination"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="45, Riya Villas, MadhuGunj Agra - 531749"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:textColor="#989898"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="10 Mins"/>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="45dp"
+                android:gravity="bottom"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/red_800"
+                    android:paddingLeft="25dp"
+                    android:id="@+id/txtWait"
+                    android:paddingRight="25dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="please wait store admin will approved shortly"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="15dp"
+                    android:id="@+id/cardPickUp"
+                    android:layout_marginEnd="5dp"
+                    android:visibility="gone"
+                    android:backgroundTint="#30BF23"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:paddingLeft="25dp"
+                        android:paddingRight="25dp"
+                        android:paddingTop="10dp"
+                        android:textAllCaps="true"
+                        android:paddingBottom="10dp"
+                        android:text="Pickup"/>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
