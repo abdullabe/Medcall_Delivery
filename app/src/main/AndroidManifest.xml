@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".firebase.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,7 +24,9 @@
         android:theme="@style/Theme.MedcallDelivery"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".activity.map.MapActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.trackingmap.DeliverySuccessActivity"
             android:exported="false" />
@@ -69,6 +72,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".firebase.MyFirebaseMessagingService"
             android:exported="false">
@@ -77,9 +81,17 @@
             </intent-filter>
         </service>
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDmASSRCXyX8RYU4a3Y3Aj97bQRoQftrDE" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+
     </application>
 
 </manifest>

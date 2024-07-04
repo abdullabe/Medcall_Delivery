@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
-    var baseurl = "http://medcallapp.riddhi.info:3001/api/"
+    var baseurl = "https://medcallapp.riddhi.info:3001/api/"
 
     var okHttpClient = OkHttpClient().newBuilder()
         .connectTimeout(30, TimeUnit.SECONDS)

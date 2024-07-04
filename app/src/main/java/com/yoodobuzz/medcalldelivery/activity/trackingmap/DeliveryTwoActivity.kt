@@ -4,12 +4,14 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
@@ -18,8 +20,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.yoodobuzz.medcalldelivery.R
 import com.yoodobuzz.medcalldelivery.activity.Dashboard.DashboardActivity
-import com.yoodobuzz.medcalldelivery.activity.deliveries.adapter.AdapterActivity
-import com.yoodobuzz.medcalldelivery.activity.deliveries.adapter.AdapterActivity.Companion.activityListDetails
 import com.yoodobuzz.medcalldelivery.activity.deliveries.viewmodel.ActivityViewmodel
 import com.yoodobuzz.medcalldelivery.network.Resource
 import com.yoodobuzz.medcalldelivery.utils.Helper
@@ -28,6 +28,7 @@ import com.yoodobuzz.medcalldelivery.utils.SessionManager
 class DeliveryTwoActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     lateinit var cardPickUp: CardView
     lateinit var txtDestination: TextView
+    lateinit var txtPhNo: TextView
     lateinit var txtWait: TextView
     lateinit var viewmodel: ActivityViewmodel
     lateinit var dialog: SweetAlertDialog
@@ -47,6 +48,7 @@ class DeliveryTwoActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
         dialog=SweetAlertDialog(this,SweetAlertDialog.PROGRESS_TYPE)
         cardPickUp = findViewById(R.id.cardPickUp)
         txtWait = findViewById(R.id.txtWait)
+        txtPhNo = findViewById(R.id.txtPhNo)
         txtDestination = findViewById(R.id.txtDestination)
         swipeRefreshLayout = findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout) as SwipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(this)
@@ -69,6 +71,24 @@ class DeliveryTwoActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
                     if (response.data != null) {
                         println("### response :${response.data}")
                         if(response.data.cartItems.isNotEmpty()){
+                            val activityList = response.data.cartItems.get(0)
+                            txtDestination.setText(
+                                activityList.userAdd!!.building + "," + activityList.userAdd!!.area + "," +
+                                        activityList.userAdd!!.landmark + "," + activityList.userAdd!!.district + "," +
+                                        activityList.userAdd!!.state + "," +
+                                        activityList.userAdd!!.country + "-" + activityList.userAdd!!.pincode
+                            )
+                            val phno=response.data.cartItems.get(0).phoneNumber.toString()
+
+                            txtPhNo.setText(phno)
+                            if(response.data.cartItems.get(0).phoneNumber.toString().isNotEmpty()){
+                                txtPhNo.setOnClickListener{
+                                    val intent = Intent(Intent.ACTION_DIAL).apply {
+                                        data = Uri.parse("tel:$phno")
+                                    }
+                                    startActivity(intent)
+                                }
+                            }
                             if(response.data.cartItems.get(0).status.equals("accept")){
                                 Toast.makeText(this, "please wait store will approved shortly", Toast.LENGTH_SHORT).show()
                                 txtWait.isVisible=true
@@ -78,6 +98,7 @@ class DeliveryTwoActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
                                 cardPickUp.isVisible=true
                             }
 
+
                             cardPickUp.setOnClickListener {
                                 if(response.data.cartItems.get(0).status.equals("accept")){
                                     Toast.makeText(this, "please wait store will approved shortly", Toast.LENGTH_SHORT).show()
@@ -85,8 +106,6 @@ class DeliveryTwoActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
                                     val intent= Intent(this@DeliveryTwoActivity,DeliveredPickUpActivity::class.java)
                                     startActivity(intent)
                                 }
-
-
 
                             }
 
@@ -106,14 +125,12 @@ class DeliveryTwoActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
     }
 
     fun function() {
-        val activityList = activityListDetails
-        txtDestination.setText(
-            activityList.userAdd!!.building + "," + activityList.userAdd!!.area + "," +
-                    activityList.userAdd!!.landmark + "," + activityList.userAdd!!.district + "," +
-                    activityList.userAdd!!.state + "," +
-                    activityList.userAdd!!.country + "-" + activityList.userAdd!!.pincode
-        )
-
+        onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent= Intent(this@DeliveryTwoActivity, DashboardActivity::class.java)
+                startActivity(intent)
+            }
+        })
     }
 
     override fun onRefresh() {

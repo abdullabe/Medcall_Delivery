@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.yoodobuzz.medcalldelivery.R
+import com.yoodobuzz.medcalldelivery.activity.Dashboard.DashboardActivity
 import com.yoodobuzz.medcalldelivery.activity.deliveries.adapter.AdapterActivity
 import com.yoodobuzz.medcalldelivery.activity.deliveries.viewmodel.ActivityViewmodel
 import com.yoodobuzz.medcalldelivery.network.Resource
@@ -53,7 +55,12 @@ class DeliveredPickUpActivity : AppCompatActivity() {
         viewmodel = ViewModelProvider(this)[ActivityViewmodel::class.java]
 
 
-
+        onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent= Intent(this@DeliveredPickUpActivity, DashboardActivity::class.java)
+                startActivity(intent)
+            }
+        })
         val session= SessionManager(this)
         val user = session.getUserDetails()
         val email = user.get("email")
@@ -71,9 +78,9 @@ class DeliveredPickUpActivity : AppCompatActivity() {
                         println("### response :${response.data}")
                         if(response.data.cartItems.isNotEmpty()){
                             txtOrderId.setText(response.data.cartItems.get(0).orderId)
-                            txtQty.setText(response.data.cartItems.get(0).productDetails!!.quantity.toString())
-                            txtPrice.setText(response.data.cartItems.get(0).productDetails!!.price)
-                            txtTotal.setText(response.data.cartItems.get(0).totAmount)
+                            txtQty.setText(response.data.cartItems.get(0).qty.toString())
+                            txtPrice.setText("₹"+response.data.cartItems.get(0).totAmount)
+                            txtTotal.setText("₹"+response.data.cartItems.get(0).totAmount)
                             txtItemName.setText(response.data.cartItems.get(0).productDetails!!.productName)
 
 
@@ -82,6 +89,7 @@ class DeliveredPickUpActivity : AppCompatActivity() {
                                 map["order_id"] = response.data.cartItems.get(0).orderId.toString()
                                 map["agent_id"] = str_userId.toString()
                                 map["status"] = "pickup"
+                                map["platform"] = "android"
                                 Helper.showDialog(dialog)
                                 viewmodel.acceptUserData(map)
                                 observeAcceptLiveData()

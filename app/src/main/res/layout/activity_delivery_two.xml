@@ -46,16 +46,28 @@
                         android:fontFamily="@font/overpass_semibold"
                         android:textStyle="bold"
                         android:text="Destination:"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:text="Order Pickup:"
+                        android:textColor="#989898"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16dp"
-                        android:textColor="#989898"
+                        android:textColor="@color/purple"
                         android:layout_marginTop="20dp"
                         android:layout_marginStart="15dp"
                         android:fontFamily="@font/overpass_semibold"
                         android:textStyle="bold"
-                        android:text="Order Pickup:"/>
+                        android:text="Contact:"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -85,6 +97,20 @@
                         android:fontFamily="@font/overpass_semibold"
                         android:textStyle="bold"
                         android:text="10 Mins"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:textColor="@color/purple"
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/txtPhNo"
+                        android:layout_marginStart="15dp"
+                        android:drawableEnd="@drawable/call_24"
+                        android:drawableTint="@color/green_800"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text=""/>
+
                 </LinearLayout>
 
             </LinearLayout>

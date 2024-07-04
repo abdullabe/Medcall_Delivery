@@ -40,8 +40,9 @@ class AdapterHistory :
         holder.txtOrderId.setText((activeList[position].orderId!!))
         holder.txtShop.setText((activeList[position].storeName!!))
         Glide.with(holder.itemView.context)
-            .load(activeList[position].productDetails?.productImage)
+            .load(activeList[position].prod_image)
             .into(holder.img_activity)
+
         holder.txtAddress.setText(activeList[position].userAdd!!.building+","+activeList[position].userAdd!!.area+","+
                 activeList[position].userAdd!!.landmark+","+activeList[position].userAdd!!.district+","+
                 activeList[position].userAdd!!.state+","+

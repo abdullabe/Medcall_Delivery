@@ -18,6 +18,8 @@ data class CartItems (
     @SerializedName("order_id"        ) var orderId        : String?         = null,
     @SerializedName("status"          ) var status         : String?         = null,
     @SerializedName("date"            ) var date           : String?         = null,
+    @SerializedName("product_image"      ) var prod_image      : String?         = null,
+    @SerializedName("qty"                ) var qty : Int?         = null,
     @SerializedName("product_Details" ) var productDetails : ProductDetails? = ProductDetails(),
     @SerializedName("tot_amount"      ) var totAmount      : String?         = null
 

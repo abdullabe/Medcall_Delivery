@@ -3,7 +3,9 @@ package com.yoodobuzz.medcalldelivery.activity.trackingmap
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
+import com.google.android.material.snackbar.Snackbar
 import com.yoodobuzz.medcalldelivery.R
 import com.yoodobuzz.medcalldelivery.activity.Dashboard.DashboardActivity
 
@@ -14,6 +16,12 @@ class DeliverySuccessActivity : AppCompatActivity() {
         setContentView(R.layout.activity_delivery_success)
 
         cardDelivered=findViewById(R.id.cardDelivered)
+        onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent= Intent(this@DeliverySuccessActivity,DashboardActivity::class.java)
+                startActivity(intent)
+            }
+        })
 
         cardDelivered.setOnClickListener {
             val intent= Intent(this@DeliverySuccessActivity,DashboardActivity::class.java)

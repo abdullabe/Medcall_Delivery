@@ -46,7 +46,7 @@ class AdapterActivity(val context: Context) :
         holder.txtOrderId.setText((activeList[position].orderId!!))
         holder.txtShop.setText((activeList[position].storeName!!))
         Glide.with(holder.itemView.context)
-            .load(activeList[position].productDetails?.productImage)
+            .load(activeList[position].prod_image)
             .into(holder.img_activity)
 
         holder.txtAddress.setText(activeList[position].userAdd!!.building+","+activeList[position].userAdd!!.area+","+
@@ -54,21 +54,18 @@ class AdapterActivity(val context: Context) :
                 activeList[position].userAdd!!.state+","+
                 activeList[position].userAdd!!.country+"-"+activeList[position].userAdd!!.pincode)
         holder.itemView.setOnClickListener(View.OnClickListener {
+
             if(activeList[position].status.equals("store_accept")){
                 val intent= Intent(context, DeliveryOneActivity::class.java)
-                activityListDetails=activeList[position]
                 context.startActivity(intent)
             }else if(activeList[position].status.equals("accept")){
                 val intent= Intent(context, DeliveryTwoActivity::class.java)
-                activityListDetails=activeList[position]
                 context.startActivity(intent)
             }else if(activeList[position].status.equals("pickup")){
                 val intent= Intent(context, DeliveredActivity::class.java)
-                activityListDetails=activeList[position]
                 context.startActivity(intent)
             }else if(activeList[position].status.equals("dispatched")){
                 val intent= Intent(context, DeliveryTwoActivity::class.java)
-                activityListDetails=activeList[position]
                 context.startActivity(intent)
             }
         })
@@ -84,7 +81,5 @@ class AdapterActivity(val context: Context) :
         val date = inputFormat.parse(inputDate)
         return outputFormat.format(date)
     }
-    companion object{
-       lateinit var activityListDetails:CartItems
-    }
+
 }

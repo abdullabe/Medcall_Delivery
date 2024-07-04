@@ -41,12 +41,13 @@ data class CartItemsHistory (
 
     @SerializedName("firstname"       ) var firstname      : String?         = null,
     @SerializedName("lastname"        ) var lastname       : String?         = null,
-    @SerializedName("phone_number"    ) var phoneNumber    : Int?            = null,
+    @SerializedName("phone_number"    ) var phoneNumber    : Long?            = null,
     @SerializedName("user_add"        ) var userAdd        : UserAddHistory?        = UserAddHistory(),
     @SerializedName("store_name"      ) var storeName      : String?         = null,
     @SerializedName("agent_name"      ) var agentName      : String?         = null,
     @SerializedName("order_id"        ) var orderId        : String?         = null,
     @SerializedName("status"          ) var status         : String?         = null,
+    @SerializedName("product_image"      ) var prod_image      : String?         = null,
     @SerializedName("date"            ) var date           : String?         = null,
     @SerializedName("product_Details" ) var productDetails : ProductDetailsHistory? = ProductDetailsHistory(),
     @SerializedName("tot_amount"      ) var totAmount      : String?         = null
