@@ -1,18 +1,17 @@
 package com.yoodobuzz.medcalldelivery.activity.splash
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.yoodobuzz.medcalldelivery.R
 import com.yoodobuzz.medcalldelivery.activity.Dashboard.DashboardActivity
 import com.yoodobuzz.medcalldelivery.activity.trackingmap.DeliveredActivity
 import com.yoodobuzz.medcalldelivery.activity.trackingmap.DeliveryOneActivity
 import com.yoodobuzz.medcalldelivery.activity.trackingmap.DeliveryTwoActivity
-import com.yoodobuzz.medcalldelivery.activity.welcome.WelcomeActivity
 
 class SplashActivity : AppCompatActivity() {
     private var back_pressed: Long = 0

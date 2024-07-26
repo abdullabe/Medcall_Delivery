@@ -15,6 +15,7 @@
                 android:src="@drawable/map_image"
                 android:scaleType="centerCrop"/>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -23,62 +24,71 @@
                 android:layout_marginEnd="5dp"
                 android:id="@+id/lnr_delivery_click"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
+                        android:textSize="14dp"
                         android:textColor="#989898"
+                        android:layout_weight="1"
                         android:layout_marginTop="15dp"
                         android:layout_marginStart="15dp"
                         android:fontFamily="@font/overpass_semibold"
                         android:textStyle="bold"
                         android:text="Destination:"/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:textColor="#989898"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginStart="15dp"
-                        android:fontFamily="@font/overpass_semibold"
-                        android:textStyle="bold"
-                        android:text="Order Deliver:"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textSize="15dp"
                         android:textColor="#989898"
                         android:layout_marginTop="15dp"
                         android:id="@+id/txtDestination"
+                        android:layout_weight="1"
+
                         android:layout_marginStart="15dp"
                         android:fontFamily="@font/overpass_semibold"
                         android:textStyle="bold"
                         android:text="45, Riya Villas, MadhuGunj Agra - 531749"/>
 
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
+                        android:textSize="14dp"
                         android:textColor="#989898"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
                         android:layout_marginStart="15dp"
                         android:fontFamily="@font/overpass_semibold"
                         android:textStyle="bold"
-                        android:text="4 Mins"/>
+                        android:text="Order Deliver:"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="#989898"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="10 Mins"/>
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -103,7 +113,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18dp"
+                        android:textSize="14dp"
                         android:layout_gravity="center"
                         android:textColor="@color/white"
                         android:paddingLeft="25dp"

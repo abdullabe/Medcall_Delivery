@@ -10,11 +10,15 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.yoodobuzz.medcalldelivery.R
 import com.yoodobuzz.medcalldelivery.activity.Dashboard.DashboardActivity
 import com.yoodobuzz.medcalldelivery.activity.deliveries.adapter.AdapterActivity
 import com.yoodobuzz.medcalldelivery.activity.deliveries.viewmodel.ActivityViewmodel
+import com.yoodobuzz.medcalldelivery.activity.trackingmap.adapter.AdapterProduct
 import com.yoodobuzz.medcalldelivery.network.Resource
 import com.yoodobuzz.medcalldelivery.utils.Helper
 import com.yoodobuzz.medcalldelivery.utils.SessionManager
@@ -23,30 +27,39 @@ class DeliveredPickUpActivity : AppCompatActivity() {
 
     lateinit var cardPickup: CardView
     lateinit var txtOrderId: TextView
-    lateinit var txtItemName: TextView
-    lateinit var txtQty: TextView
-    lateinit var txtPrice: TextView
     lateinit var txtTotal: TextView
     lateinit var viewmodel: ActivityViewmodel
     lateinit var dialog: SweetAlertDialog
     var str_userId:String?=null
+    lateinit var recProducts: RecyclerView
+    lateinit var adapterProduct: AdapterProduct
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delivered_pick_up)
         init()
+        prepareRecyclerView()
         function()
 
+    }
+    fun prepareRecyclerView(){
+        recProducts.apply {
+            val linearLayout =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            recProducts.layoutManager = linearLayout
+            recProducts.itemAnimator = DefaultItemAnimator()
+            recProducts.adapter = adapterProduct
+        }
     }
 
     fun init() {
         txtOrderId=findViewById(R.id.txtOrderId)
-        txtQty=findViewById(R.id.txtQty)
-        txtPrice=findViewById(R.id.txtPrice)
         txtTotal=findViewById(R.id.txtTotal)
-        txtItemName=findViewById(R.id.txtItemName)
         cardPickup = findViewById(R.id.cardPickup)
+
+        recProducts=findViewById(R.id.recProducts)
+        adapterProduct = AdapterProduct()
 
     }
 
@@ -78,12 +91,9 @@ class DeliveredPickUpActivity : AppCompatActivity() {
                         println("### response :${response.data}")
                         if(response.data.cartItems.isNotEmpty()){
                             txtOrderId.setText(response.data.cartItems.get(0).orderId)
-                            txtQty.setText(response.data.cartItems.get(0).qty.toString())
-                            txtPrice.setText("₹"+response.data.cartItems.get(0).totAmount)
                             txtTotal.setText("₹"+response.data.cartItems.get(0).totAmount)
-                            txtItemName.setText(response.data.cartItems.get(0).productDetails!!.productName)
 
-
+                            adapterProduct.setProductList(response.data.cartItems.get(0).products)
                             cardPickup.setOnClickListener {
                                 val map = HashMap<String, String>()
                                 map["order_id"] = response.data.cartItems.get(0).orderId.toString()

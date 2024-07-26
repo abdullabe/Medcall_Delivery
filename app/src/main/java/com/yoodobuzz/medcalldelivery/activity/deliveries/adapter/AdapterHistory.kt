@@ -26,7 +26,7 @@ class AdapterHistory :
         var txtOrderId: TextView = view.findViewById(R.id.txtOrderId)
         var txtShop: TextView = view.findViewById(R.id.txtShop)
         var txtAddress: TextView = view.findViewById(R.id.txtAddress)
-        var img_activity: ImageView = view.findViewById(R.id.img_activity)
+        var img_activity: ImageView = view.findViewById(R.id.img_prod)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context)

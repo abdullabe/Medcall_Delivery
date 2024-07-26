@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
+            android:textSize="14dp"
             android:textColor="@color/purple"
             android:id="@+id/txtName"
             android:layout_marginTop="15dp"
@@ -26,114 +26,147 @@
             android:fontFamily="@font/overpass_semibold"
             android:textStyle="bold"
             android:text="Pranab Batra"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="5dp"
+        android:id="@+id/lnr_delivery_click"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="5dp"
-            android:id="@+id/lnr_delivery_click"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
-            <LinearLayout
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="@color/purple"
+                android:layout_marginTop="15dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="@color/purple"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Order ID:"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Shop:"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Required to be picked:"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Destination:"/>
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/overpass_semibold"
+                android:textStyle="bold"
+                android:text="Order ID:"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="@color/purple"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_weight="1"
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="@color/purple"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    android:id="@+id/txtOrderID"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="62949662"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/txtStore"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Medcall 1"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/txtDate"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="18:45 27/02/2024"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/txtDestination"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="45, Riya Villas, MadhuGunj Agra - 531749 "/>
-            </LinearLayout>
+                android:id="@+id/txtOrderID"
+                android:fontFamily="@font/overpass_semibold"
+                android:textStyle="bold"
+                android:text="62949662"/>
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="#989898"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/overpass_semibold"
+                android:textStyle="bold"
+                android:text="Shop:"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="#989898"
+                android:layout_marginTop="5dp"
+                android:id="@+id/txtStore"
+                android:layout_weight="1"
+
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/overpass_semibold"
+                android:textStyle="bold"
+                android:text="Medcall 1"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="#989898"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/overpass_semibold"
+                android:textStyle="bold"
+                android:text="Required to be picked:"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="#989898"
+                android:layout_marginTop="5dp"
+                android:id="@+id/txtDate"
+                android:layout_weight="1"
+
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/overpass_semibold"
+                android:textStyle="bold"
+                android:text="18:45 27/02/2024"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="#989898"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/overpass_semibold"
+                android:textStyle="bold"
+                android:text="Destination:"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="#989898"
+                android:layout_marginTop="5dp"
+                android:id="@+id/txtDestination"
+                android:layout_weight="1"
+
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/overpass_semibold"
+                android:textStyle="bold"
+                android:text="45, Riya Villas, MadhuGunj Agra - 531749 "/>
+        </LinearLayout>
+    </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -144,92 +177,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
+            android:textSize="14dp"
             android:textColor="@color/purple"
             android:layout_marginTop="15dp"
             android:layout_marginStart="30dp"
             android:fontFamily="@font/overpass_semibold"
             android:textStyle="bold"
             android:text="Customer Order:"/>
-
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="3"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:id="@+id/txtItemName"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Item name"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/txtQty"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="1"/>
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/txtPrice"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="16"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:background="#989898"
-            />
+            android:id="@+id/recProducts"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -249,7 +207,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textColor="#989898"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="15dp"
@@ -268,7 +226,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textColor="#989898"
                     android:id="@+id/txtTotal"
                     android:layout_marginTop="5dp"
@@ -302,7 +260,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textColor="@color/purple"
                     android:layout_marginTop="15dp"
                     android:layout_marginStart="15dp"
@@ -312,7 +270,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textColor="@color/purple"
                     android:layout_marginTop="15dp"
                     android:layout_marginStart="15dp"
@@ -322,7 +280,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textColor="@color/purple"
                     android:layout_marginTop="15dp"
                     android:layout_marginStart="15dp"
@@ -340,7 +298,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textColor="#30BF23"
                     android:layout_marginTop="15dp"
                     android:layout_marginStart="15dp"
@@ -350,7 +308,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textColor="#989898"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="15dp"
@@ -360,7 +318,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textColor="@color/purple"
                     android:layout_marginTop="5dp"
                     android:id="@+id/txtPhNo"
@@ -395,7 +353,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp"
+                    android:textSize="14dp"
                     android:layout_gravity="center"
                     android:textColor="@color/white"
                     android:paddingLeft="25dp"
@@ -418,7 +376,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp"
+                    android:textSize="14dp"
                     android:layout_gravity="center"
                     android:textColor="@color/white"
                     android:paddingLeft="25dp"

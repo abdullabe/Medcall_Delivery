@@ -21,7 +21,8 @@ data class CartItems (
     @SerializedName("product_image"      ) var prod_image      : String?         = null,
     @SerializedName("qty"                ) var qty : Int?         = null,
     @SerializedName("product_Details" ) var productDetails : ProductDetails? = ProductDetails(),
-    @SerializedName("tot_amount"      ) var totAmount      : String?         = null
+    @SerializedName("tot_amount"      ) var totAmount      : String?         = null,
+    @SerializedName("products"        ) var products       : ArrayList<Products> = arrayListOf()
 
 )
 data class UserAdd (
@@ -53,5 +54,12 @@ data class ProductDetails (
     @SerializedName("category"      ) var category     : String? = null,
     @SerializedName("brand_name"    ) var brandName    : String? = null,
     @SerializedName("__v"           ) var _v           : Int?    = null
+
+)
+data class Products (
+
+    @SerializedName("product_name" ) var productName : String? = null,
+    @SerializedName("quantity"     ) var quantity    : Int?    = null,
+    @SerializedName("price"        ) var price       : String?    = null
 
 )

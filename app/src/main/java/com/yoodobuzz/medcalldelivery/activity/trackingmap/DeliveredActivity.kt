@@ -16,6 +16,7 @@ import com.yoodobuzz.medcalldelivery.activity.deliveries.viewmodel.ActivityViewm
 import com.yoodobuzz.medcalldelivery.network.Resource
 import com.yoodobuzz.medcalldelivery.utils.Helper
 import com.yoodobuzz.medcalldelivery.utils.SessionManager
+import okhttp3.internal.userAgent
 
 class DeliveredActivity : AppCompatActivity() {
     lateinit var cardDelivered:CardView
@@ -77,7 +78,7 @@ class DeliveredActivity : AppCompatActivity() {
                         if(response.data.cartItems.isNotEmpty()){
                             val activityList = response.data.cartItems.get(0)
                             orderId=activityList.orderId.toString()
-
+                            strorder_id=orderId.toString()
                             txtDestination.setText(
                                 activityList.userAdd!!.building + "," + activityList.userAdd!!.area + "," +
                                         activityList.userAdd!!.landmark + "," + activityList.userAdd!!.district + "," +
@@ -124,6 +125,9 @@ class DeliveredActivity : AppCompatActivity() {
 
         })
 
+    }
+    companion object{
+        var strorder_id =""
     }
 
 }

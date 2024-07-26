@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
+            android:textSize="14dp"
             android:textColor="#989898"
             android:layout_marginTop="5dp"
             android:id="@+id/txtDate"
@@ -44,88 +44,116 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".7"
+                android:layout_gravity="center"
                 android:layout_margin="3dp"
                 app:cardCornerRadius="15dp">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:src="@drawable/logo"
-                    android:id="@+id/img_activity"
+                    android:id="@+id/img_prod"
                     />
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".9"
+                android:layout_weight="2.3"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="@color/purple"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Order ID:"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Shop:"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Address:"/>
+                    android:weightSum="2"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="@color/purple"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="Order ID:"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="@color/purple"
+                        android:layout_weight="1"
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/txtOrderId"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="62949662"/>
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.4"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="@color/purple"
-                    android:layout_marginTop="15dp"
-                    android:id="@+id/txtOrderId"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="62949662"/>
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:weightSum="2"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="#989898"
+                        android:layout_weight="1"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="Shop:"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="#989898"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:id="@+id/txtShop"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="Medcall 1"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/txtShop"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Medcall 1"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/txtAddress"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="45, Riya Villas, MadhuGunj Agra - 531749 "/>
+                    android:weightSum="2"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="#989898"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="Address:"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="#989898"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/txtAddress"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="45, Riya Villas, MadhuGunj Agra - 531749 "/>
+
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

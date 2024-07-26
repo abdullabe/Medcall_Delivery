@@ -13,11 +13,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.yoodobuzz.medcalldelivery.R
 import com.yoodobuzz.medcalldelivery.activity.Dashboard.DashboardActivity
 import com.yoodobuzz.medcalldelivery.activity.deliveries.DeliveryActivity
 import com.yoodobuzz.medcalldelivery.activity.deliveries.viewmodel.ActivityViewmodel
+import com.yoodobuzz.medcalldelivery.activity.trackingmap.adapter.AdapterProduct
 import com.yoodobuzz.medcalldelivery.network.Resource
 import com.yoodobuzz.medcalldelivery.utils.Helper
 import com.yoodobuzz.medcalldelivery.utils.SessionManager
@@ -32,21 +36,30 @@ class DeliveryOneActivity : AppCompatActivity() {
     lateinit var txtStore:TextView
     lateinit var txtDate:TextView
     lateinit var txtDestination:TextView
-    lateinit var txtQty:TextView
-    lateinit var txtPrice:TextView
     lateinit var txtTotal:TextView
-    lateinit var txtItemName:TextView
     lateinit var txtPhNo:TextView
     lateinit var viewmodel: ActivityViewmodel
     lateinit var dialog: SweetAlertDialog
     lateinit var orderId:String
+    lateinit var recProducts: RecyclerView
+    lateinit var adapterProduct: AdapterProduct
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delivery_one)
         init()
+        prepareRecyclerView()
         function()
                
+    }
+    fun prepareRecyclerView(){
+        recProducts.apply {
+            val linearLayout =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            recProducts.layoutManager = linearLayout
+            recProducts.itemAnimator = DefaultItemAnimator()
+            recProducts.adapter = adapterProduct
+        }
     }
     fun init(){
         cardAccept=findViewById(R.id.cardAccept)
@@ -56,11 +69,11 @@ class DeliveryOneActivity : AppCompatActivity() {
         txtStore=findViewById(R.id.txtStore)
         txtDate=findViewById(R.id.txtDate)
         txtDestination=findViewById(R.id.txtDestination)
-        txtQty=findViewById(R.id.txtQty)
-        txtPrice=findViewById(R.id.txtPrice)
         txtTotal=findViewById(R.id.txtTotal)
         txtPhNo=findViewById(R.id.txtPhNo)
-        txtItemName=findViewById(R.id.txtItemName)
+
+        recProducts=findViewById(R.id.recProducts)
+        adapterProduct = AdapterProduct()
 
     }
     fun function(){
@@ -122,11 +135,10 @@ class DeliveryOneActivity : AppCompatActivity() {
                                     activityList.userAdd!!.landmark+","+activityList.userAdd!!.district+","+
                                     activityList.userAdd!!.state+","+
                                     activityList.userAdd!!.country+"-"+activityList.userAdd!!.pincode)
-                            txtQty.setText(activityList.qty.toString())
-                            txtPrice.setText("₹${activityList.totAmount?.toDoubleOrNull()?.toInt() ?: 0}")
                             txtTotal.setText("₹${activityList.totAmount?.toDoubleOrNull()?.toInt() ?: 0}")
                             txtPhNo.setText(activityList.phoneNumber.toString())
-                            txtItemName.setText(activityList.productDetails!!.productName)
+                            adapterProduct.setProductList(activityList.products)
+
 
 
                         }else{
