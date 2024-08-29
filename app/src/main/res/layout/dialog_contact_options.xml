@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="14dp">
-
-    <Button
-        android:id="@+id/buttonCallUs"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="5dp">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Call Us" />
+        android:padding="14dp"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/buttonCallUs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Call Us" />
 
-    <Button
-        android:id="@+id/buttonWhatsAppUs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="WhatsApp Us"
-        android:layout_marginTop="8dp"/>
-</LinearLayout>
+        <Button
+            android:id="@+id/buttonWhatsAppUs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WhatsApp Us"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

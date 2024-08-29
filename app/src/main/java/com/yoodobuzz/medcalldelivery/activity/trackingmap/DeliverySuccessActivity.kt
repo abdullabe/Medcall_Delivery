@@ -15,7 +15,6 @@ import com.yoodobuzz.medcalldelivery.utils.SessionManager
 
 class DeliverySuccessActivity : AppCompatActivity() {
     lateinit var cardDelivered:CardView
-    lateinit var txtName:TextView
     lateinit var txtOrder_id:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +37,6 @@ class DeliverySuccessActivity : AppCompatActivity() {
     }
     fun init(){
         cardDelivered=findViewById(R.id.cardDelivered)
-        txtName=findViewById(R.id.txtName)
         txtOrder_id=findViewById(R.id.txtOrderId)
     }
 
@@ -48,7 +46,6 @@ fun function(){
    val agentname = user.get("agentname").toString()
 
     println("### agentname : ${agentname}")
-    txtName.setText("Welldone ${agentname}!")
     txtOrder_id.setText("You just delivered order ${DeliveredActivity.strorder_id}")
 
 }

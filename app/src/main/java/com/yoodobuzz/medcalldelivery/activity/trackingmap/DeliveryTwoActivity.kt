@@ -73,10 +73,7 @@ class DeliveryTwoActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
                         if(response.data.cartItems.isNotEmpty()){
                             val activityList = response.data.cartItems.get(0)
                             txtDestination.setText(
-                                activityList.userAdd!!.building + "," + activityList.userAdd!!.area + "," +
-                                        activityList.userAdd!!.landmark + "," + activityList.userAdd!!.district + "," +
-                                        activityList.userAdd!!.state + "," +
-                                        activityList.userAdd!!.country + "-" + activityList.userAdd!!.pincode
+                                activityList.userAdd!!.address_detail
                             )
                             val phno=response.data.cartItems.get(0).phoneNumber.toString()
 

@@ -50,7 +50,7 @@
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/overpass_semibold"
                 android:textStyle="bold"
-                android:text="Order ID:"/>
+                android:text="Order ID"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/overpass_semibold"
                 android:textStyle="bold"
-                android:text="Shop:"/>
+                android:text="Shop"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/overpass_semibold"
                 android:textStyle="bold"
-                android:text="Required to be picked:"/>
+                android:text="Required to be picked"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/overpass_semibold"
                 android:textStyle="bold"
-                android:text="Destination:"/>
+                android:text="Destination"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
     </LinearLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_marginTop="5dp"
             android:background="#989898"
             />
@@ -240,7 +240,7 @@
         </LinearLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_marginTop="5dp"
             android:background="#989898"
             />

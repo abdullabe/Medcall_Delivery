@@ -43,7 +43,7 @@
                     android:layout_marginStart="15dp"
                     android:fontFamily="@font/overpass_semibold"
                     android:textStyle="bold"
-                    android:text="Order ID:"/>
+                    android:text="Order ID"/>
 
             </LinearLayout>
             <LinearLayout
@@ -76,7 +76,7 @@
             android:layout_marginStart="30dp"
             android:fontFamily="@font/overpass_semibold"
             android:textStyle="bold"
-            android:text="Customer Order:"/>
+            android:text="Customer Order"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
         </LinearLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_marginTop="5dp"
             android:background="#989898"
             />
@@ -159,7 +159,7 @@
                     android:layout_marginStart="15dp"
                     android:fontFamily="@font/overpass_semibold"
                     android:textStyle="bold"
-                    android:text="Debit card:"/>
+                    android:text="Debit card"/>
 
             </LinearLayout>
             <LinearLayout

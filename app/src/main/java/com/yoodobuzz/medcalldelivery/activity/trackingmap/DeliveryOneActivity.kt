@@ -131,10 +131,7 @@ class DeliveryOneActivity : AppCompatActivity() {
                             txtOrderID.setText(activityList.orderId)
                             txtStore.setText(activityList.storeName)
                             txtDate.setText(convertDateFormat(activityList.date!!))
-                            txtDestination.setText(activityList.userAdd!!.building+","+activityList.userAdd!!.area+","+
-                                    activityList.userAdd!!.landmark+","+activityList.userAdd!!.district+","+
-                                    activityList.userAdd!!.state+","+
-                                    activityList.userAdd!!.country+"-"+activityList.userAdd!!.pincode)
+                            txtDestination.setText(activityList.userAdd!!.address_detail)
                             txtTotal.setText("₹${activityList.totAmount?.toDoubleOrNull()?.toInt() ?: 0}")
                             txtPhNo.setText(activityList.phoneNumber.toString())
                             adapterProduct.setProductList(activityList.products)

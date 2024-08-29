@@ -49,10 +49,7 @@ class AdapterActivity(val context: Context) :
             .load(activeList[position].prod_image)
             .into(holder.img_activity)
 
-        holder.txtAddress.setText(activeList[position].userAdd!!.building+","+activeList[position].userAdd!!.area+","+
-                activeList[position].userAdd!!.landmark+","+activeList[position].userAdd!!.district+","+
-                activeList[position].userAdd!!.state+","+
-                activeList[position].userAdd!!.country+"-"+activeList[position].userAdd!!.pincode)
+        holder.txtAddress.setText(activeList[position].userAdd!!.address_detail)
         holder.itemView.setOnClickListener(View.OnClickListener {
 
             if(activeList[position].status.equals("store_accept")){

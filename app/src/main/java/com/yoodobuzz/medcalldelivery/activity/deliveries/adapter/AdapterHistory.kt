@@ -43,10 +43,7 @@ class AdapterHistory :
             .load(activeList[position].prod_image)
             .into(holder.img_activity)
 
-        holder.txtAddress.setText(activeList[position].userAdd!!.building+","+activeList[position].userAdd!!.area+","+
-                activeList[position].userAdd!!.landmark+","+activeList[position].userAdd!!.district+","+
-                activeList[position].userAdd!!.state+","+
-                activeList[position].userAdd!!.country+"-"+activeList[position].userAdd!!.pincode)
+        holder.txtAddress.setText(activeList[position].userAdd!!.address_detail)
     }
     override fun getItemCount(): Int {
         return activeList.size

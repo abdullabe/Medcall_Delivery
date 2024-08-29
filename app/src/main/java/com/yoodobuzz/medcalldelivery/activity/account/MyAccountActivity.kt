@@ -19,7 +19,6 @@ class MyAccountActivity : AppCompatActivity() {
     lateinit var txtAddress: TextView
     lateinit var txtPhNo: TextView
     lateinit var txtPincode: TextView
-
     lateinit var viewmodel: MyAccountViewmodel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,11 +54,6 @@ class MyAccountActivity : AppCompatActivity() {
         viewmodel.getProfileData(str_userId)
         observeGetProfileLiveData()
     }
-
-
-
-
-
     fun observeGetProfileLiveData() {
         viewmodel.getProfileDetailsLiveData.observe(this, Observer { response ->
             when (response) {

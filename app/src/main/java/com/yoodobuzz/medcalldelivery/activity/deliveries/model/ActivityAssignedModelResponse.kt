@@ -29,16 +29,10 @@ data class UserAdd (
 
     @SerializedName("_id"      ) var Id       : String? = null,
     @SerializedName("user_id"  ) var userId   : String? = null,
-    @SerializedName("building" ) var building : String? = null,
-    @SerializedName("area"     ) var area     : String? = null,
-    @SerializedName("landmark" ) var landmark : String? = null,
-    @SerializedName("pincode"  ) var pincode  : String? = null,
-    @SerializedName("type"     ) var type     : String? = null,
-    @SerializedName("country"  ) var country  : String? = null,
-    @SerializedName("state"    ) var state    : String? = null,
-    @SerializedName("district" ) var district : String? = null,
     @SerializedName("active"   ) var active   : String? = null,
-    @SerializedName("__v"      ) var _v       : Int?    = null
+    @SerializedName("address_detail"   ) var address_detail   : String? = null,
+    @SerializedName("lat"   ) var lat   : String? = null,
+    @SerializedName("__v"      ) var _v       : Int?    = null,
 
 )
 

@@ -6,6 +6,7 @@
         android:name="android.hardware.camera"
         android:required="false" />
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -86,7 +87,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDmASSRCXyX8RYU4a3Y3Aj97bQRoQftrDE" />
+            android:value="AIzaSyCkRSn-ZXBqRN5Qm2cDL3Wz1hz2xftOft4" />
 
         <activity
             android:name=".MainActivity"
