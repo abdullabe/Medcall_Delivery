@@ -1,144 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.trackingmap.DeliveredActivity">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-    tools:context=".activity.trackingmap.DeliveredActivity">
-        <RelativeLayout
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/lnr" />
+
+        <LinearLayout
+            android:id="@+id/lnr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
             android:orientation="vertical">
-            <fragment
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
+
+            <LinearLayout
+                android:id="@+id/lnr_delivery_click"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@+id/lnr"
-                />
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:text="Destination"
+                        android:textColor="#989898"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtDestination"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/overpass_semibold"
+
+                        android:text="45, Riya Villas, MadhuGunj Agra - 531749"
+                        android:textColor="#989898"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:text="Order Deliver"
+                        android:textColor="#989898"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtDeliverTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:text="10 Mins"
+                        android:textColor="#989898"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:id="@+id/lnr"
-                android:background="@color/white"
-                android:layout_alignParentEnd="true"
-                android:orientation="vertical"
-                >
-                <LinearLayout
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardDelivered"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="2"
-
-                    android:layout_marginStart="15dp"
+                    android:layout_gravity="center"
                     android:layout_marginEnd="5dp"
-                    android:id="@+id/lnr_delivery_click"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    android:backgroundTint="#30BF23"
+                    app:cardCornerRadius="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center"
+                        android:paddingLeft="25dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:textSize="14dp"
-                            android:textColor="#989898"
-                            android:layout_weight="1"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginStart="15dp"
-                            android:fontFamily="@font/overpass_semibold"
-                            android:textStyle="bold"
-                            android:text="Destination"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:textSize="15dp"
-                            android:textColor="#989898"
-                            android:layout_marginTop="15dp"
-                            android:id="@+id/txtDestination"
-                            android:layout_weight="1"
+                        android:text="Delivered"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="14dp" />
+                </androidx.cardview.widget.CardView>
 
-                            android:layout_marginStart="15dp"
-                            android:fontFamily="@font/overpass_semibold"
-                            android:textStyle="bold"
-                            android:text="45, Riya Villas, MadhuGunj Agra - 531749"/>
-
-
-
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:textSize="14dp"
-                            android:textColor="#989898"
-                            android:layout_marginTop="15dp"
-                            android:layout_weight="1"
-                            android:layout_marginStart="15dp"
-                            android:fontFamily="@font/overpass_semibold"
-                            android:textStyle="bold"
-                            android:text="Order Deliver"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:textSize="14dp"
-                            android:textColor="#989898"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginStart="15dp"
-                            android:layout_weight="1"
-                            android:id="@+id/txtDeliverTime"
-                            android:fontFamily="@font/overpass_semibold"
-                            android:textStyle="bold"
-                            android:text="10 Mins"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="15dp"
-                    >
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="15dp"
-                        android:id="@+id/cardDelivered"
-                        android:layout_marginEnd="5dp"
-                        android:backgroundTint="#30BF23"
-                        android:layout_gravity="center">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14dp"
-                            android:layout_gravity="center"
-                            android:textColor="@color/white"
-                            android:paddingLeft="25dp"
-                            android:textAllCaps="true"
-
-                            android:paddingRight="25dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:text="Delivered"/>
-                    </androidx.cardview.widget.CardView>
-
-                </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
 
-        </RelativeLayout>
+    </RelativeLayout>
 
 
-    </LinearLayout>
+</LinearLayout>
