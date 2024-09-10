@@ -1,7 +1,12 @@
 package com.yoodobuzz.medcalldelivery.activity.trackingmap.googlemap
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.annotation.ColorRes
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -13,6 +18,7 @@ import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
+import com.yoodobuzz.medcalldelivery.R
 import java.lang.Math.atan2
 import java.lang.Math.cos
 import java.lang.Math.sin
@@ -65,14 +71,20 @@ fun GoogleMap.drawPolyline(shape: String, @ColorRes colorId: Int, with: Float = 
         addPolyline(polyline)
     }
 }
-fun GoogleMap.addMarkerExt(position: LatLng) {
+
+fun GoogleMap.addMarkerExt(position: LatLng,context: Context) {
+    // Custom delivery point icon
+//    val deliveryIcon = BitmapDescriptorFactory.fromResource(R.drawable.pin)
+    val bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.pin)
+    val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 140, 140, false)
+    val deliveryIcon = BitmapDescriptorFactory.fromBitmap(resizedBitmap) // Correct method to use
     addMarker(
         MarkerOptions()
             .position(position)
-            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
-
+            .icon(deliveryIcon) // Use the custom delivery point icon here
     )
 }
+
 
 fun displayWidth(): Int {
     return Resources.getSystem().displayMetrics.widthPixels

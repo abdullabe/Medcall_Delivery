@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
     var baseurl = "https://medcallapp.riddhi.info:3001/api/"
+    const val API_KEY = "AIzaSyCkRSn-ZXBqRN5Qm2cDL3Wz1hz2xftOft4"
 
     var okHttpClient = OkHttpClient().newBuilder()
         .connectTimeout(30, TimeUnit.SECONDS)
@@ -22,4 +23,10 @@ object RetrofitInstance {
             .build()
             .create(ApiRequest::class.java)
     }
+     val retrofit = Retrofit.Builder()
+        .baseUrl("https://maps.googleapis.com/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+
 }

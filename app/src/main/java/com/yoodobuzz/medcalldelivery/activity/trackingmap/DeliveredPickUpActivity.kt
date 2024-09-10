@@ -3,9 +3,13 @@ package com.yoodobuzz.medcalldelivery.activity.trackingmap
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
+import android.util.DisplayMetrics
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -23,15 +27,21 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
 import com.google.maps.android.clustering.ClusterManager
@@ -50,6 +60,7 @@ import com.yoodobuzz.medcalldelivery.utils.Helper
 import com.yoodobuzz.medcalldelivery.utils.SessionManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -69,18 +80,27 @@ class DeliveredPickUpActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var deliveryPoint: LatLng? =null
     private var circle: Circle? = null
+    private var bikeMarker: Marker? = null
+
+    var previousLocation: Location? = null
+    lateinit var currentPolyline: Polyline
+
+    private val polylinePoints = mutableListOf<LatLng>()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delivered_pick_up)
+
+
         init()
         prepareRecyclerView()
         function()
 
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+
     }
     fun prepareRecyclerView(){
         recProducts.apply {
@@ -93,6 +113,25 @@ class DeliveredPickUpActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun init() {
+        // Get the screen height in pixels
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val screenHeight = displayMetrics.heightPixels
+
+
+        // Calculate 75% of the screen height
+        val mapHeight = (screenHeight * 0.75).toInt()
+        // Find the SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+
+        // Set the height of the map to 75% of the screen
+        val layoutParams = mapFragment.view?.layoutParams
+        layoutParams?.height = mapHeight
+        mapFragment.view?.layoutParams = layoutParams
+
+        mapFragment.getMapAsync(this)
+
+
         txtOrderId=findViewById(R.id.txtOrderId)
         txtTotal=findViewById(R.id.txtTotal)
         cardPickup = findViewById(R.id.cardPickup)
@@ -116,7 +155,7 @@ class DeliveredPickUpActivity : AppCompatActivity(), OnMapReadyCallback {
         val session= SessionManager(this)
         val user = session.getUserDetails()
         val email = user.get("email")
-         str_userId = user.get("user_id").toString()
+        str_userId = user.get("user_id").toString()
 
         viewmodel.getActivityData(str_userId!!)
         observeActivityViewmodel()
@@ -145,7 +184,7 @@ class DeliveredPickUpActivity : AppCompatActivity(), OnMapReadyCallback {
 
                             }
 
-                            val latLngParts = response.data.cartItems.get(0).userAdd!!.lat!!.split(",")
+                            val latLngParts = response.data.cartItems.get(0).store_lat!!.split(",")
 
 // Extract latitude and longitude
                             val latitude = latLngParts[0].toDouble()
@@ -197,43 +236,39 @@ class DeliveredPickUpActivity : AppCompatActivity(), OnMapReadyCallback {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
 
-            mMap.isMyLocationEnabled = true
+            mMap.isMyLocationEnabled = false
+            startLocationUpdates()
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
                     location?.let {
                         val currentLatLng = LatLng(it.latitude, it.longitude)
                         val START_LOCATION = currentLatLng
-                        mMap.addMarker(MarkerOptions().position(currentLatLng).title("Current Location"))
 
                         // Use coroutines to wait for the deliveryPoint to be set
                         CoroutineScope(Dispatchers.Main).launch {
-                            // Wait for deliveryPoint to be set
-                            withContext(Dispatchers.IO) {
-                                while (deliveryPoint == null) {
-                                    delay(100) // Wait for 100 ms
-                                }
+                            val deliveryPointAsync = async { waitForDeliveryPoint() }
+                            val deliveryPointLatLng = deliveryPointAsync.await()
+                            val bitmap = BitmapFactory.decodeResource(resources, R.drawable.pin)
+                            val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 140, 140, false)
+                            val deliveryIcon = BitmapDescriptorFactory.fromBitmap(resizedBitmap) // Correct method to use
+                            mMap.addMarker(MarkerOptions().position(deliveryPointLatLng!!).title("Delivery Point"))!!.setIcon(deliveryIcon)
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 14f))
+
+                            // Draw the route between current location and delivery point
+                            googleMap.addMarkerExt(START_LOCATION,this@DeliveredPickUpActivity)
+                            addClusteredMarkers(mMap)
+
+
+                            with(googleMap) {
+                                setCustomMapStyle(
+                                    context = this@DeliveredPickUpActivity, styleResId = R.raw.map_style
+                                )
+                                setStartingZoomArea(
+                                    startLatLng = START_LOCATION, deliveryPointLatLng!!
+                                )
                             }
 
-                            if (deliveryPoint != null) {
-                                mMap.addMarker(MarkerOptions().position(deliveryPoint!!).title("Delivery Point"))
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 14f))
 
-                                // Draw the route between current location and delivery point
-                                drawRoute(currentLatLng, deliveryPoint!!)
-                                googleMap.addMarkerExt(START_LOCATION)
-                                addClusteredMarkers(mMap)
-
-                                with(googleMap) {
-                                    setCustomMapStyle(
-                                        context = this@DeliveredPickUpActivity, styleResId = R.raw.map_style
-                                    )
-                                    setStartingZoomArea(
-                                        startLatLng = START_LOCATION, deliveryPoint!!
-                                    )
-                                }
-                            } else {
-                                Toast.makeText(this@DeliveredPickUpActivity, "Delivery point is not available", Toast.LENGTH_SHORT).show()
-                            }
                         }
                     }
                 }
@@ -242,9 +277,6 @@ class DeliveredPickUpActivity : AppCompatActivity(), OnMapReadyCallback {
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
         }
     }
-
-
-
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
@@ -257,8 +289,6 @@ class DeliveredPickUpActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
-
-
     private fun drawRoute(currentLatLng: LatLng, destinationLatLng: LatLng) {
         val origin = "${currentLatLng.latitude},${currentLatLng.longitude}"
         val destination = "${destinationLatLng.latitude},${destinationLatLng.longitude}"
@@ -278,12 +308,23 @@ class DeliveredPickUpActivity : AppCompatActivity(), OnMapReadyCallback {
                     val points = routes.getJSONObject(0).getJSONObject("overview_polyline").getString("points")
                     val decodedPath = PolyUtil.decode(points)
 
-                    val polylineOptions = PolylineOptions()
-                        .addAll(decodedPath)
-                        .width(10f)
-                        .color(ContextCompat.getColor(this, R.color.purple))
+                    // Clear the existing polyline points and add the new ones
+                    polylinePoints.clear()
+                    polylinePoints.addAll(decodedPath)
 
-                    mMap.addPolyline(polylineOptions)
+                    // Check if polyline exists, if not create a new one
+                    if (::currentPolyline.isInitialized) {
+                        // Update the polyline's points
+                        currentPolyline.points = polylinePoints
+                    } else {
+                        // Create the polyline for the first time
+                        val polylineOptions = PolylineOptions()
+                            .addAll(polylinePoints)
+                            .width(20f)
+                            .color(ContextCompat.getColor(this, R.color.purple))
+
+                        currentPolyline = mMap.addPolyline(polylineOptions)
+                    }
                 }
             },
             { error ->
@@ -293,6 +334,7 @@ class DeliveredPickUpActivity : AppCompatActivity(), OnMapReadyCallback {
         )
         requestQueue.add(directionsRequest)
     }
+
     private fun addClusteredMarkers(googleMap: GoogleMap) {
         // Create the ClusterManager class and set the custom renderer
         val clusterManager = ClusterManager<PlaceItem>(this, googleMap)
@@ -335,4 +377,93 @@ class DeliveredPickUpActivity : AppCompatActivity(), OnMapReadyCallback {
                 .strokeColor(ContextCompat.getColor(this, R.color.green_500))
         )
     }
+    private fun startLocationUpdates() {
+        val locationRequest = LocationRequest.create().apply {
+            interval = 5000 // Update every 5 seconds
+            fastestInterval = 2000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
+        // Declare previous location globally to track the user's movement
+
+        fusedLocationClient.requestLocationUpdates(
+            locationRequest,
+            object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult) {
+                    val location = locationResult.lastLocation
+                    location?.let {
+                        val currentLatLng = LatLng(it.latitude, it.longitude)
+                        println("### location : $currentLatLng")
+
+                        CoroutineScope(Dispatchers.Main).launch {
+                            val deliveryPointAsync = async { waitForDeliveryPoint() }
+                            val deliveryPointLatLng = deliveryPointAsync.await()
+                            drawRoute(currentLatLng, deliveryPointLatLng)
+                        }
+
+
+                        // Custom bike icon for the current location
+                        val bikeBitmap = BitmapFactory.decodeResource(resources, R.drawable.bike)
+                        val resizedBike = Bitmap.createScaledBitmap(bikeBitmap, 100, 100, false)
+                        val bikeIcon = BitmapDescriptorFactory.fromBitmap(resizedBike)
+
+                        // Calculate the bearing if the previous location is available
+                        var bearing = 0f
+                        if (previousLocation != null) {
+                            bearing = previousLocation!!.bearingTo(it)
+                        }
+
+                        // Update or create the bike marker
+                        if (bikeMarker == null) {
+                            // Add the marker for the first time
+                            bikeMarker = mMap.addMarker(
+                                MarkerOptions()
+                                    .position(currentLatLng)
+                                    .icon(bikeIcon)
+                                    .rotation(bearing) // Apply rotation here
+                                    .flat(true)        // Set flat so that the marker rotates smoothly
+                                    .title("Current Location")
+                            )
+                        } else {
+                            // Move the marker to the new location
+                            bikeMarker?.position = currentLatLng
+                            bikeMarker?.rotation = bearing // Update the rotation with the new bearing
+                        }
+
+                        // Update the previous location for the next bearing calculation
+                        previousLocation = it
+                    }
+                }
+
+            },
+            Looper.getMainLooper()
+        )
+
+    }
+    private suspend fun waitForDeliveryPoint(): LatLng {
+        return withContext(Dispatchers.IO) {
+            while (deliveryPoint == null) {
+                delay(100) // Wait for 100 ms before checking again
+            }
+            deliveryPoint!! // Once set, return the deliveryPoint
+        }
+    }
+
 }

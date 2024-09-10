@@ -20,210 +20,214 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-         />
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lnr"
-        android:layout_below="@+id/map"
-        android:orientation="vertical">
+         />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:layout_marginStart="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginEnd="5dp"
-            android:id="@+id/lnr_delivery_click"
-            android:orientation="horizontal">
+            android:id="@+id/lnr"
+            android:layout_below="@+id/map"
+            android:orientation="vertical">
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:textColor="@color/purple"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Order ID"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:textColor="@color/purple"
-                    android:id="@+id/txtOrderId"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="62949662"/>
-
-                    </LinearLayout>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14dp"
-            android:textColor="@color/purple"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="30dp"
-            android:fontFamily="@font/overpass_semibold"
-            android:textStyle="bold"
-            android:text="Customer Order"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/recProducts"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="3"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Total"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:textColor="#989898"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="15dp"
-                    android:id="@+id/txtTotal"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="276"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="5dp"
-            android:background="#989898"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:textColor="@color/purple"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Debit card"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:textColor="#30BF23"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/overpass_semibold"
-                    android:textStyle="bold"
-                    android:text="Paid"/>
-            </LinearLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="15dp"
-            >
-            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="15dp"
-                android:id="@+id/cardPickup"
+                android:weightSum="2"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginEnd="5dp"
-                android:backgroundTint="#30BF23"
-                android:layout_gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
+                android:id="@+id/lnr_delivery_click"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:layout_gravity="center"
-                    android:textColor="@color/white"
-                    android:textAllCaps="true"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="@color/purple"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="Order ID"/>
 
-                    android:paddingLeft="25dp"
-                    android:paddingRight="25dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:text="Pickup"/>
-            </androidx.cardview.widget.CardView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="@color/purple"
+                        android:id="@+id/txtOrderId"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="62949662"/>
 
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="@color/purple"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/overpass_semibold"
+                android:textStyle="bold"
+                android:text="Customer Order"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recProducts"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="#989898"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="Total"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="#989898"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:id="@+id/txtTotal"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="276"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#989898"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="@color/purple"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="Debit card"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="#30BF23"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/overpass_semibold"
+                        android:textStyle="bold"
+                        android:text="Paid"/>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="15dp"
+                >
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="15dp"
+                    android:id="@+id/cardPickup"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="#30BF23"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:textAllCaps="true"
+
+                        android:paddingLeft="25dp"
+                        android:paddingRight="25dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Pickup"/>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>

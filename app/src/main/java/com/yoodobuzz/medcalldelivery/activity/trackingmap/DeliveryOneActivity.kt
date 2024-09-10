@@ -2,6 +2,8 @@ package com.yoodobuzz.medcalldelivery.activity.trackingmap
 
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -17,18 +19,33 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.yoodobuzz.medcalldelivery.R
 import com.yoodobuzz.medcalldelivery.activity.Dashboard.DashboardActivity
 import com.yoodobuzz.medcalldelivery.activity.deliveries.DeliveryActivity
 import com.yoodobuzz.medcalldelivery.activity.deliveries.viewmodel.ActivityViewmodel
 import com.yoodobuzz.medcalldelivery.activity.trackingmap.adapter.AdapterProduct
+import com.yoodobuzz.medcalldelivery.activity.trackingmap.googlemap.addMarkerExt
+import com.yoodobuzz.medcalldelivery.activity.trackingmap.googlemap.setCustomMapStyle
+import com.yoodobuzz.medcalldelivery.activity.trackingmap.googlemap.setStartingZoomArea
 import com.yoodobuzz.medcalldelivery.network.Resource
 import com.yoodobuzz.medcalldelivery.utils.Helper
 import com.yoodobuzz.medcalldelivery.utils.SessionManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class DeliveryOneActivity : AppCompatActivity() {
+class DeliveryOneActivity : AppCompatActivity(), OnMapReadyCallback {
     lateinit var cardAccept:CardView
     lateinit var card_decline:CardView
     lateinit var txtName:TextView
@@ -43,6 +60,9 @@ class DeliveryOneActivity : AppCompatActivity() {
     lateinit var orderId:String
     lateinit var recProducts: RecyclerView
     lateinit var adapterProduct: AdapterProduct
+
+    private lateinit var mMap: GoogleMap
+    private var deliveryPoint:LatLng? =null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +95,9 @@ class DeliveryOneActivity : AppCompatActivity() {
         recProducts=findViewById(R.id.recProducts)
         adapterProduct = AdapterProduct()
 
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
     }
     fun function(){
         dialog= SweetAlertDialog(this,SweetAlertDialog.PROGRESS_TYPE)
@@ -137,7 +160,12 @@ class DeliveryOneActivity : AppCompatActivity() {
                             adapterProduct.setProductList(activityList.products)
 
 
+                            val latLngParts = activityList.store_lat!!.split(",")
 
+// Extract latitude and longitude
+                            val latitude = latLngParts[0].toDouble()
+                            val longitude = latLngParts[1].toDouble()
+                            deliveryPoint= LatLng(latitude,longitude)
                         }else{
                             println("### response data : ${response.data.message}")
                         }
@@ -199,6 +227,30 @@ class DeliveryOneActivity : AppCompatActivity() {
 
         })
 
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        CoroutineScope(Dispatchers.Main).launch {
+            // Wait for deliveryPoint to be set
+            withContext(Dispatchers.IO) {
+                while (deliveryPoint == null) {
+                    delay(100) // Wait for 100 ms
+                }
+            }
+
+            if (deliveryPoint != null) {
+                val bitmap = BitmapFactory.decodeResource(resources, R.drawable.pin)
+                val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 140, 140, false)
+                val deliveryIcon = BitmapDescriptorFactory.fromBitmap(resizedBitmap) // Correct method to use
+                mMap.addMarker(MarkerOptions().position(deliveryPoint!!).title("Delivery Point"))!!.setIcon(deliveryIcon)
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(deliveryPoint!!, 14f))
+
+            } else {
+                Toast.makeText(this@DeliveryOneActivity, "Delivery point is not available", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
     fun convertDateFormat(inputDate: String): String {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())

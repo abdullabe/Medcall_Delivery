@@ -15,11 +15,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <ImageView
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:src="@drawable/map_image"
-                android:scaleType="centerCrop"/>
+                android:layout_height="350dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,10 +89,10 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginStart="15dp"
                         android:layout_weight="1"
-
+                        android:id="@+id/txtDeliverTime"
                         android:fontFamily="@font/overpass_semibold"
                         android:textStyle="bold"
-                        android:text="10 Mins"/>
+                        android:text=""/>
 
                 </LinearLayout>
                 <LinearLayout

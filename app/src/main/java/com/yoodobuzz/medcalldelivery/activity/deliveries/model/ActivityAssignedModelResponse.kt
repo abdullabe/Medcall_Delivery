@@ -22,6 +22,7 @@ data class CartItems (
     @SerializedName("qty"                ) var qty : Int?         = null,
     @SerializedName("product_Details" ) var productDetails : ProductDetails? = ProductDetails(),
     @SerializedName("tot_amount"      ) var totAmount      : String?         = null,
+    @SerializedName("store_lat"      ) var store_lat      : String?         = null,
     @SerializedName("products"        ) var products       : ArrayList<Products> = arrayListOf()
 
 )
